@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Anniversary Bal</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#a7c7e7;        /* soft blue background */
+      --card:#eaf4fb;      /* light card background */
+      --accent:#6892cd;    /* strong blue accent */
+      --muted:#5a6d7a;     /* muted gray-blue for text */
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --radius:10px;
+      --max-width:980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: 'Poppins', system-ui, -apple-system, Arial;
+      background: linear-gradient(180deg,var(--bg),#f0f7ff);
+      margin:0;
+      color:var(--muted);
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+    header{
+      background:var(--accent);
+      color:white;
+      padding:20px;
+      text-align:center;
+      border-radius:0 0 var(--radius) var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{margin:0;font-weight:500}
+    main{flex:1;max-width:var(--max-width);margin:auto;padding:10 px;display:grid;gap:10px}
+    .card{
+      background:var(--card);
+      padding:10px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .story{
+      background:linear-gradient(180deg,#c9defa,#accbed); 
+      padding:14px; 
+      border-radius:10px;
+    }
+    .slideshow{position:relative;overflow:hidden;border-radius:var(--radius);text-align:center}
+    .slideshow img{width:70%;display:none;border-radius:var(--radius);margin:auto}
+    .slideshow img.active{display:block}
+    .btn{
+      display:inline-block;
+      background:var(--accent);
+      color:white;
+      padding:10px 1px;
+      border-radius:var(--radius);
+      text-decoration:none;
+      transition:background .3s;
+      margin-top:10px;
+    }
+    .btn:hover{background:#2c65b5;}
+    footer{
+      padding:10px 10px; 
+      border-top:1px dashed #b3d1f7;
+      display:flex; 
+      justify-content:space-between; 
+      align-items:center
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card slideshow" id="slideshow">
+      <header>
+        <h1><b>Happy Anniversary Bal💙 </b></h1>
+        <p>This is only part 1/3 gifts I did/bought for u hehe. Wag mo toh popost ha, tinulungan me ni gpt eh</p>
+     
+     <hr width="200px" height="400">
+        <div class="actions">
+          <a class="btn" id="playAll">Play Slideshow</a>
+        </div>
+      </header>
+
+      <img src="pics/1.jpg" class="active" alt="Memory 1">
+      <img src="pics/2.jpg" alt="Memory 2">
+      <img src="pics/3.jpg" alt="Memory 3">
+      <img src="pics/4.jpg" alt="Memory 4">
+      <img src="pics/5.jpg" alt="Memory 5">
+      <img src="pics/6.jpg" alt="Memory 6">
+      <img src="pics/7.jpg" alt="Memory 7">
+      <img src="pics/8.jpg" alt="Memory 8">
+      <img src="pics/9.jpg" alt="Memory 9">
+      <img src="pics/10.jpg" alt="Memory 10">
+      <img src="pics/11.jpg" alt="Memory 11">
+      <img src="pics/12.jpg" alt="Memory 12">
+      <img src="pics/13.png" alt="Memory 13">
+    </div>
+
+    <div class="card">
+      <h2>Side note</h2>
+      <div class="story">
+        <p>Two years ago, I was still skeptical if I am already prepared enough to be in a relationship, especially with someone like you whom I know that I will be with forever. Tapos ikaw??? nanliligaw na nangkikiss agad, aba kagaleng talaga so much.
+            Pero gusto ko rin naman, maharot din ako eh hehe. Anyways, ilang taon na tayong magkasama, more than 3 years na (2 years official). We've been through many ups and downs, maski kahit anong posisyon nadiscover na natin, chos. Nakita na natin ang lahat-lahat sa isa't-isa. Nasubok ko na ata lahat ng pasensyang tinatago mo sa katawan at nainis na ata bawat hibla ng balbon ko sa iyo, pero andito pa rin tayo. Malamang kasi di pa tayo kinukuha ni Lord. 
+
+        </p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <span>Puso natin Blue 💙</span>
+    <span> - Forever yours, Bal</span>
+  </footer>
+
+  <!-- Audio file -->
+  <audio id="slideshowAudio" src="../pics/d4vd - Here With Me (Instrumental).mp3"></audio>
+
+   <script>
+    const images = document.querySelectorAll("#slideshow img");
+    const playBtn = document.getElementById("playAll");
+    const audio = document.getElementById("slideshowAudio");
+
+    let index = 0;
+    let slideTimer = null;
+
+    function show(i){
+      images.forEach((img,j)=> img.classList.toggle("active", j===i));
+      index = i;
+    }
+
+    playBtn.addEventListener("click", ()=>{
+      if(slideTimer){ clearInterval(slideTimer); }
+      show(0);
+      slideTimer = setInterval(()=> show((index+1)%images.length), 2000); // 2 seconds
+
+      // Play audio
+      audio.currentTime = 0;
+      audio.play();
+
+      // Stop audio after 10 seconds
+      setTimeout(()=> {
+        audio.pause();
+        audio.currentTime = 0; // reset to start
+      }, 25000); // 
+    });
+  </script>
+</body>
+</html>
